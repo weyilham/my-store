@@ -1,0 +1,54 @@
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  &__error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  &__title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  &__form {
+    width: 30%;
+    padding: 20px;
+    // border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0px;
+      &__input {
+        padding: 10px;
+        border: none;
+        background-color: #eee;
+        margin: 5px;
+        outline: none;
+      }
+    }
+    &__button {
+      padding: 10px;
+      width: 100%;
+      border: none;
+      background-color: #000;
+      color: #fff;
+      margin-top: 20px;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  &__link {
+    a {
+      color: blue;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}
