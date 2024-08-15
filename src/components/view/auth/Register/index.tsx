@@ -22,6 +22,13 @@ function RegisterView() {
       password: form.password.value,
     };
 
+    if (!data.email || !data.fullname || !data.phone || !data.password) {
+      setError("Please fill in all fields");
+      setIsLoading(false);
+
+      return;
+    }
+
     const result = await fetch("/api/user/register", {
       method: "POST",
       headers: {
