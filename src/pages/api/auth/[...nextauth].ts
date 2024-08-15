@@ -2,7 +2,8 @@ import { compare } from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { signIn } from "@/lib/init/service";
+import GoogleProvider from "next-auth/providers/google";
+import { loginWithGoogle, signIn } from "@/lib/init/service";
 
 const authOptions: NextAuthOptions = {
   session: {
@@ -35,6 +36,11 @@ const authOptions: NextAuthOptions = {
         }
       },
     }),
+    // OAuth Google
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
+    }),
   ],
   callbacks: {
     async jwt({ account, token, user, profile }: any) {
@@ -43,6 +49,19 @@ const authOptions: NextAuthOptions = {
         token.fullname = user.fullname;
         token.phone = user.phone;
         token.role = user.role;
+      }
+
+      if (account?.provider === "google") {
+        const data = {
+          fullname: user.fullname,
+          email: user.email,
+          type: "google",
+        };
+        await loginWithGoogle(data, (data: any) => {
+          token.email = data.email;
+          token.fullname = data.fullname;
+          token.type = data.type;
+        });
       }
 
       return token;

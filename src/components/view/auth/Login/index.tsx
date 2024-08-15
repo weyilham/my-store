@@ -72,6 +72,18 @@ function LoginView() {
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <hr className={styles.login__divinder} />
+        <div className={styles.login__other}>
+          <button
+            type="button"
+            className={styles.login__other__button}
+            disabled={isLoading}
+            onClick={() => signIn("google", { callbackUrl, redirect: false })}
+          >
+            <i className="bx bxl-google"></i>
+            {isLoading ? "Loading..." : "Login with Google"}
+          </button>
+        </div>
       </div>
       <p className={styles.login__link}>
         Don{"'"}t have an account? Sign Up{" "}
