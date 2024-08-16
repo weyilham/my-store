@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import "boxicons/css/boxicons.min.css";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 function LoginView() {
   const { push, query } = useRouter();
@@ -47,43 +49,27 @@ function LoginView() {
       {error && <p className={styles.login__error}>{error}</p>}
       <div className={styles.login__form}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.login__form__item}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className={styles.login__form__item__input}
-            />
-          </div>
-          <div className={styles.login__form__item}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className={styles.login__form__item__input}
-            />
-          </div>
-          <button
+          <Input label="Email" name="email" type="email" />
+          <Input label="Password" name="password" type="password" />
+          <Button
             type="submit"
             className={styles.login__form__button}
-            disabled={isLoading}
+            varian="primary"
           >
             {isLoading ? "Loading..." : "Login"}
-          </button>
+          </Button>
         </form>
         <hr className={styles.login__divinder} />
         <div className={styles.login__other}>
-          <button
+          <Button
             type="button"
-            className={styles.login__other__button}
-            disabled={isLoading}
+            varian="primary"
             onClick={() => signIn("google", { callbackUrl, redirect: false })}
+            className={styles.login__other__button}
           >
             <i className="bx bxl-google"></i>
-            {isLoading ? "Loading..." : "Login with Google"}
-          </button>
+            Login with Google
+          </Button>
         </div>
       </div>
       <p className={styles.login__link}>

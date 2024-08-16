@@ -3,6 +3,8 @@ import Link from "next/link";
 import styles from "./Register.module.scss";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 function RegisterView() {
   const { push } = useRouter();
@@ -51,49 +53,17 @@ function RegisterView() {
       {error && <p className={styles.register__error}>{error}</p>}
       <div className={styles.register__form}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.register__form__item}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="fullname">Fullname</label>
-            <input
-              type="text"
-              name="fullname"
-              id="fullname"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              name="phone"
-              id="phone"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <div className={styles.register__form__item}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className={styles.register__form__item__input}
-            />
-          </div>
-          <button
+          <Input name="email" label="Email" type="email" />
+          <Input name="fullname" label="Fullname" type="text" />
+          <Input name="phone" label="Phone" type="number" />
+          <Input name="password" label="Password" type="password" />
+          <Button
             type="submit"
+            varian="primary"
             className={styles.register__form__button}
-            disabled={isLoading}
           >
             {isLoading ? "Loading..." : "Register"}
-          </button>
+          </Button>
         </form>
       </div>
       <p className={styles.register__link}>
