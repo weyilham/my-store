@@ -98,6 +98,9 @@ export async function loginWithGoogle(data: any, callback: Function) {
     callback(user[0]);
   } else {
     data.role = "member";
+    console.log(data);
+    // console.log(user);
+    // return;
     addDoc(collection(firestore, "users"), data).then(() => {
       callback(data);
     });

@@ -52,14 +52,15 @@ const authOptions: NextAuthOptions = {
       }
 
       if (account?.provider === "google") {
+        // console.log(user);
         const data = {
-          fullname: user.fullname,
+          fullname: user.name,
           email: user.email,
           type: "google",
         };
         await loginWithGoogle(data, (data: any) => {
-          token.email = data.email;
           token.fullname = data.fullname;
+          token.email = data.email;
           token.type = data.type;
         });
       }
