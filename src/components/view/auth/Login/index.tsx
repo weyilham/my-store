@@ -4,6 +4,7 @@ import styles from "./Login.module.scss";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
+import "boxicons/css/boxicons.min.css";
 
 function LoginView() {
   const { push, query } = useRouter();
