@@ -1,0 +1,34 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  &__error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  &__title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  &__form {
+    width: 30%;
+    padding: 20px;
+    // border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    &__button {
+      width: 100%;
+    }
+  }
+
+  &__link {
+    a {
+      color: blue;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}

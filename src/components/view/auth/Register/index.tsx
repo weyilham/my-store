@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import authService from "@/services/auth";
+import AuthLayout from "@/components/Layouts/AuthLayout";
 
 function RegisterView() {
   const { push } = useRouter();
@@ -31,13 +33,7 @@ function RegisterView() {
       return;
     }
 
-    const result = await fetch("/api/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const result = await authService.registerAccount(data);
 
     if (result.status === 200) {
       setIsLoading(false);
@@ -48,28 +44,22 @@ function RegisterView() {
     }
   };
   return (
-    <div className={styles.register}>
-      <h1 className={styles.register__title}>Register</h1>
-      {error && <p className={styles.register__error}>{error}</p>}
-      <div className={styles.register__form}>
-        <form onSubmit={handleSubmit}>
-          <Input name="email" label="Email" type="email" />
-          <Input name="fullname" label="Fullname" type="text" />
-          <Input name="phone" label="Phone" type="number" />
-          <Input name="password" label="Password" type="password" />
-          <Button
-            type="submit"
-            varian="primary"
-            className={styles.register__form__button}
-          >
-            {isLoading ? "Loading..." : "Register"}
-          </Button>
-        </form>
-      </div>
-      <p className={styles.register__link}>
-        Have an account? Sign in <Link href="/auth/login">here</Link>
-      </p>
-    </div>
+    <AuthLayout
+      title="Register"
+      link="/auth/login"
+      linkText="Have an account? Sign in "
+      error={error}
+    >
+      <form onSubmit={handleSubmit}>
+        <Input name="email" label="Email" type="email" />
+        <Input name="fullname" label="Fullname" type="text" />
+        <Input name="phone" label="Phone" type="number" />
+        <Input name="password" label="Password" type="password" />
+        <Button type="submit" varian="primary" className={styles.button}>
+          {isLoading ? "Loading..." : "Register"}
+        </Button>
+      </form>
+    </AuthLayout>
   );
 }
 
