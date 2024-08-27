@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Link from "next/link";
+
 import styles from "./Login.module.scss";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
